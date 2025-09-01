@@ -1,0 +1,66 @@
+@WebApi_HostAddress = http://localhost:5123
+@ContentType = application/json
+
+### Get all persons
+GET {{WebApi_HostAddress}}/api/persons
+Accept: {{ContentType}}
+
+### Get person by ID
+GET {{WebApi_HostAddress}}/api/persons/1
+Accept: {{ContentType}}
+
+### Get persons by color
+GET {{WebApi_HostAddress}}/api/persons/color/blau
+Accept: {{ContentType}}
+
+### Get persons by color (green)
+GET {{WebApi_HostAddress}}/api/persons/color/grün
+Accept: {{ContentType}}
+
+### Get persons by color (red)
+GET {{WebApi_HostAddress}}/api/persons/color/rot
+Accept: {{ContentType}}
+
+### Create a new person
+POST {{WebApi_HostAddress}}/api/persons
+Content-Type: {{ContentType}}
+
+{
+  "name": "Max",
+  "lastName": "Mustermann",
+  "zipCode": "10115",
+  "city": "Berlin",
+  "colorId": 3
+}
+
+### Create another person
+POST {{WebApi_HostAddress}}/api/persons
+Content-Type: {{ContentType}}
+
+{
+  "name": "Lisa",
+  "lastName": "Schneider",
+  "zipCode": "80331",
+  "city": "München",
+  "colorId": 4
+}
+
+### Try to create person with invalid color
+POST {{WebApi_HostAddress}}/api/persons
+Content-Type: {{ContentType}}
+
+{
+  "name": "Invalid",
+  "lastName": "Color",
+  "zipCode": "12345",
+  "city": "Teststadt",
+  "colorId": 99
+}
+
+### Get non-existent person (should return 404)
+GET {{WebApi_HostAddress}}/api/persons/999
+Accept: {{ContentType}}
+
+### Get persons by non-existent color
+GET {{WebApi_HostAddress}}/api/persons/color/orange
+Accept: {{ContentType}}
