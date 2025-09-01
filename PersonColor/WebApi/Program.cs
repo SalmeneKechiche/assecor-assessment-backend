@@ -20,6 +20,13 @@ if (!File.Exists(csvPath))
 // Services registrieren
 if (useDatabase)
 {
+    // Ensure the Data directory exists for SQLite database
+    var dataDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Data");
+    if (!Directory.Exists(dataDirectory))
+    {
+        Directory.CreateDirectory(dataDirectory);
+    }
+
     builder.Services.AddDbContext<PersonDbContext>(options =>
         options.UseSqlite(config.GetConnectionString("DefaultConnection")));
     builder.Services.AddScoped<IPersonRepository, DatabasePersonRepository>();
